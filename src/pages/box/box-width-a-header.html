@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box with a header</title>
+  </head>
+  <body>
+    <navigation-bar></navigation-bar>
+
+    <div class="container-sm">
+      <p>
+        <strong>Description</strong>
+      </p>
+      <p>
+        An implementation of the nested Box example from Use cases. The invert
+        boolean attribute inverts the colors using
+        <code>: invert(100%) filter</code>.
+      </p>
+
+      <hr />
+
+      <h2 class="mb-4">Example</h2>
+
+      <box-l padding="0">
+        <box-l border-width="0" invert>head</box-l>
+        <box-l border-width="0">body</box-l>
+      </box-l>
+    </div>
+    <script type="module" src="../../js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Box Layout</title>
+  </head>
+  <body>
+    <navigation-bar></navigation-bar>
+
+    <div class="container-sm">
+      <p>
+        <strong>Description</strong>
+      </p>
+      <p>
+        The Box comes with default padding and border. The padding value is set
+        to the first point on the modular scale <code>(var(--s1))</code> and the
+        border-widthuses the <code>var(--border-thin)</code> variable.
+      </p>
+      <hr />
+
+      <h2 class="mb-4">Example</h2>
+
+      <box-l>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
+          provident? Molestias nemo laboriosam ipsum est odio alias voluptate
+          quidem commodi, itaque veritatis, delectus laborum id quasi iste.
+          Obcaecati, nisi fugit.
+        </p>
+        <!-- contents of the box -->
+      </box-l>
+    </div>
+    <script type="module" src="../../js/main.js"></script>
+  </body>
+</html>
