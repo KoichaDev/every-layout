@@ -2,9 +2,9 @@
 import type { CSSProperties, NativeElements } from "vue";
 
 const {
-  align,
-  justify,
-  gap,
+  align = "flex-start",
+  justify = "flex-start",
+  gap = "1em",
   is = "div",
   noWrap,
 } = defineProps<{
@@ -19,17 +19,12 @@ const {
 <template>
   <component
     :is="is"
-    class="cluster"
+    class="cluster-layout"
     :class="{
       'cluster-justify': justify,
       'cluster-align': align,
-      'cluster-flow-exception': !!noWrap,
     }"
-    :style="{
-      '--flow-gap': gap,
-      '--cluster-justify': justify,
-      '--cluster-alignment': align,
-    }"
+    :data-wrap="noWrap ? 'exception' : null"
     v-bind="$attrs"
   >
     <slot />
@@ -37,22 +32,22 @@ const {
 </template>
 
 <style scoped>
-.cluster {
+.cluster-layout {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--flow-gap, 1em);
-  justify-content: var(--cluster-justify, flex-start);
+  gap: v-bind(gap);
+  justify-content: flex-start;
 }
 
-.cluster-flow-exception {
+[data-wrap="exception"] {
   flex-wrap: nowrap;
 }
 
 .cluster-justify {
-  --cluster-alignment: var(--cluster-alignment);
+  justify-content: v-bind(justify);
 }
 
 .cluster-align {
-  align-items: var(--cluster-alignment, flex-start);
+  align-items: v-bind(align);
 }
 </style>
