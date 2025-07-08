@@ -17,10 +17,8 @@ const {
 <template>
   <component
     :is="is"
-    class="wrapper-l"
-    :class="{
-      'wrapper-l-flow-exception': !!noWrap,
-    }"
+    class="wrapper-layout"
+    :data-wrap="noWrap ? 'exception' : null"
     v-bind="$attrs"
   >
     <slot />
@@ -28,15 +26,16 @@ const {
 </template>
 
 <style scoped>
-.wrapper-l {
+.wrapper-layout {
   position: relative;
   margin-inline: auto;
+  width: 100%;
   max-width: v-bind(maxWidth);
   padding-left: v-bind(gutter);
   padding-right: v-bind(gutter);
 }
 
-.wrapper-l-flow-exception {
+[data-wrap="exception"] {
   margin-inline: 0;
 }
 </style>
