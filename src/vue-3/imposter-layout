@@ -1,0 +1,56 @@
+<script setup lang="ts">
+import type { CSSProperties, NativeElements } from 'vue'
+
+const {
+  is = 'div',
+  margin,
+  fixed = false,
+  breakout = false,
+} = defineProps<{
+  is?: keyof NativeElements
+  margin?: CSSProperties['margin']
+  fixed?: boolean
+  breakout?: boolean
+}>()
+</script>
+
+<template>
+  <component
+    :is="is"
+    class="msg-imposter-layout"
+    :class="[fixed ? 'msg-fixed' : 'msg-contain', breakout && 'msg-breakout']"
+    :style="{
+      '--flow-margin-inline': margin,
+    }"
+    v-bind="$attrs"
+  >
+    <slot />
+  </component>
+</template>
+
+<style scoped>
+.msg-imposter-layout {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.msg-contain {
+  --flow-margin-inline: 0px;
+
+  overflow: auto;
+  max-inline-size: calc(100% - (var(--flow-margin-inline) * 2));
+  max-block-size: calc(100% - (var(--flow-margin-inline) * 2));
+}
+
+.msg-fixed {
+  position: fixed;
+}
+
+.msg-breakout {
+  max-inline-size: none;
+  max-block-size: none;
+  overflow: visible;
+}
+</style>
