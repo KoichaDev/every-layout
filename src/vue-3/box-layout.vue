@@ -14,7 +14,7 @@ const {
   paddingLeft,
   invert,
 } = defineProps<{
-  is?: keyof NativeElements;
+  is?: keyof NativeElements | NveComponentName;
   padding?: CSSProperties["padding"];
   paddingBlock?: CSSProperties["paddingBlock"];
   paddingInline?: CSSProperties["paddingInline"];
