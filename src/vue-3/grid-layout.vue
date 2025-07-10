@@ -1,31 +1,34 @@
 <script setup lang="ts">
-type ColumnsNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+import type { CSSProperties } from "vue";
 
-type ColumnsString = `${ColumnsNumber}`;
-
-type Columns = ColumnsString | ColumnsNumber;
-
-const { columns } = defineProps<{ columns: Columns }>();
+const {
+  repeat = "auto-fit",
+  gap = "1em",
+  min = "25em",
+  max = "1fr",
+} = defineProps<{
+  repeat?: "auto-fit" | "auto-fill" | ({} & string);
+  gap?: CSSProperties["gap"];
+  min?: string;
+  max?: string;
+}>();
 </script>
 
 <template>
-  <div class="grid-layout" :style="{ '--columns': +columns }">
+  <div class="grid-layout">
     <slot />
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .grid-layout {
-  --width: 25em;
-  --gap: 1em;
-  --min-column-width: calc((var(--width) / var(--columns)) - var(--gap));
+  --gap: v-bind(gap);
+  --repeat: v-bind(repeat);
+  --max: v-bind(max);
+  --min: v-bind(min);
 
   display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(auto-fit, minmax(var(--min-column-width), 1fr));
-
-  > * {
-    min-width: 0;
-  }
+  grid-gap: var(--gap);
+  grid-template-columns: repeat(var(--repeat), minmax(var(--min), var(--max)));
 }
 </style>
